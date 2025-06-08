@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="pw2.ConversorPage"
+             Title="Conversor"
+             BackgroundColor="#D3D3D3">
+
+        <ContentPage.ToolbarItems>
+                <ToolbarItem Text="Operations" Clicked="OnOperationsClicked" Order="Primary" />
+                <ToolbarItem Text="LogOut" Clicked="OnLogOutClicked" Order="Primary" />
+                <ToolbarItem Text="Exit" Clicked="OnExitClicked" Order="Primary" />
+        </ContentPage.ToolbarItems>
+
+        <ScrollView>
+                <VerticalStackLayout>
+                        <BoxView HeightRequest="60"
+                                 BackgroundColor="#3B5A76"/>
+                        <Label  Text="OOP Conversor"
+                                FontSize="28"
+                                TextColor="White"
+                                HorizontalOptions="Center"
+                                Margin="0,-50,0,20"/>
+
+                        <Label x:Name="OutputLabel"
+                        FontSize="20"
+                        Margin="5,0,5,5"
+                        TextColor="#313131"
+                        LineBreakMode="TailTruncation"
+                        HorizontalTextAlignment="End"
+                        VerticalOptions="Start"/>
+
+                        <Entry  x:Name="InputEntry"
+                                FontSize="20"
+                                Margin="5,5,5,0"
+                                IsReadOnly="True"
+                                HorizontalTextAlignment="End"
+                                TextColor="Black"
+                                BackgroundColor="White"/>
+
+                        <Grid ColumnSpacing="10"
+                              RowSpacing="10"
+                              Padding="20">
+                                <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button x:Name="Button7"
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Text="7"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="Button8"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Text="8"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="Button9"
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        Text="9"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="ButtonDecToBin"
+                                        Grid.Row="0"
+                                        Grid.Column="3"
+                                        Text="DecimalToBinary"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+
+                                <Button x:Name="Button4"
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Text="4"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="Button5"
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Text="5"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="Button6"
+                                        Grid.Row="1"
+                                        Grid.Column="2"
+                                        Text="6"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="ButtonDecToTwoComp"
+                                        Grid.Row="1"
+                                        Grid.Column="3"
+                                        Text="DecimalToTwoComplement"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+
+                                <Button x:Name="Button1"
+                                        Grid.Row="2"
+                                        Grid.Column="0"
+                                        Text="1"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="Button2"
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        Text="2"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="Button3"
+                                        Grid.Row="2"
+                                        Grid.Column="2"
+                                        Text="3"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="ButtonDecToOct"
+                                        Grid.Row="2"
+                                        Grid.Column="3"
+                                        Text="DecimalToOctal"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+
+                                <Button x:Name="ButtonAC"
+                                        Grid.Row="3"
+                                        Grid.Column="0"
+                                        Text="AC"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="Button0"
+                                        Grid.Row="3"
+                                        Grid.Column="1"
+                                        Text="0"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="ButtonSign"
+                                        Grid.Row="3"
+                                        Grid.Column="2"
+                                        Text="-"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="ButtonDecToHex"
+                                        Grid.Row="3"
+                                        Grid.Column="3"
+                                        Text="DecimalToHexadecimal"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+
+                                <Button x:Name="ButtonBinToDec"
+                                        Grid.Row="4"
+                                        Grid.Column="3"
+                                        Text="BinaryToDecimal"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+
+                                <Button x:Name="ButtonA"
+                                        Grid.Row="5"
+                                        Grid.Column="0"
+                                        Text="A"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="ButtonB"
+                                        Grid.Row="5"
+                                        Grid.Column="1"
+                                        Text="B"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="ButtonC"
+                                        Grid.Row="5"
+                                        Grid.Column="2"
+                                        Text="C"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="ButtonTwoCompToDec"
+                                        Grid.Row="5"
+                                        Grid.Column="3"
+                                        Text="TwoComplementToDecimal"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="ButtonD"
+                                        Grid.Row="6"
+                                        Grid.Column="0"
+                                        Text="D"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="ButtonE"
+                                        Grid.Row="6"
+                                        Grid.Column="1"
+                                        Text="E"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="ButtonF"
+                                        Grid.Row="6"
+                                        Grid.Column="2"
+                                        Text="F"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="ButtonOctToDec"
+                                        Grid.Row="6"
+                                        Grid.Column="3"
+                                        Text="OctalToDecimal"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                                <Button x:Name="ButtonHexToDec"
+                                        Grid.Row="7"
+                                        Grid.Column="3"
+                                        Text="HexadecimalToDecimal"
+                                        BackgroundColor="#a9a9a9"
+                                        TextColor="Black"/>
+                        </Grid>
+                </VerticalStackLayout>
+        </ScrollView>
+</ContentPage>

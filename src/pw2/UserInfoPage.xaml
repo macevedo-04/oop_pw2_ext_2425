@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="pw2.UserInfoPage"
+             Title="User Information"
+             BackgroundColor="#D3D3D3">
+
+       <ContentPage.ToolbarItems>
+              <ToolbarItem Text="Converter" Clicked="OnCalculatorClicked" Order="Primary" />
+              <ToolbarItem Text="LogOut" Clicked="OnLogOutClicked" Order="Primary" />
+              <ToolbarItem Text="Exit" Clicked="OnExitClicked" Order="Primary" />
+       </ContentPage.ToolbarItems>
+
+       <VerticalStackLayout>
+              <BoxView HeightRequest="60"
+                     BackgroundColor="#3B5A76"/>
+              <Label  Text="OOP Conversor"
+                     FontSize="28"
+                     TextColor="White"
+                     HorizontalOptions="Center"
+                     Margin="0,-50,0,30"/>
+              
+              <Label x:Name="NameLabel"
+                     Text="Name: "
+                     FontSize="18"
+                     Margin="30,0"
+                     TextColor="Black"/>
+              
+              <Label x:Name="UsernameLabel"
+                     Text="Username: "
+                     FontSize="18"
+                     Margin="30,0"
+                     TextColor="Black"/>
+
+              <Label x:Name="EmailLabel"
+                     Text="Email: "
+                     FontSize="18"
+                     Margin="30,0"
+                     TextColor="Black"/>
+
+              <Label x:Name="PasswordLabel"
+                     Text="Password: "
+                     FontSize="18"
+                     Margin="30,0"
+                     TextColor="Black"/>
+
+              <Label x:Name="NumOperationsLabel"
+                     Text="Number of operations: "
+                     FontSize="18"
+                     Margin="30,0"
+                     TextColor="Black"/>
+
+       </VerticalStackLayout>
+</ContentPage>

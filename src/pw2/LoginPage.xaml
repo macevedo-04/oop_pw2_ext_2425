@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="pw2.LoginPage"
+             BackgroundColor="#d3d3d3"
+             Title="Login">
+             
+       <ContentPage.ToolbarItems>
+              <ToolbarItem Text="Exit" Clicked="OnExitClicked"/>
+       </ContentPage.ToolbarItems>
+
+        <VerticalStackLayout>
+              <BoxView HeightRequest="60"
+                            BackgroundColor="#3B5A76"/>
+
+              <Label Text="OOP Conversor"
+                            FontSize="28"
+                            TextColor="#ffffff"
+                            HorizontalOptions="Center"
+                            Margin="0,-50,0,30"/>
+
+              <Label Text="Username"
+                     FontSize="18"
+                     Margin="30,0"
+                     TextColor="Black"/>
+              <Entry x:Name="UsernameEntry"
+                     Placeholder="Enter your username"
+                     Margin="30,0"
+                     TextColor="Black"
+                     BackgroundColor="White"/>
+
+              <Label Text="Password"
+                     FontSize="18"
+                     Margin="30,10,30,0"
+                     TextColor="Black"/>
+              <Entry x:Name="PasswordEntry"
+                     Placeholder="Enter your password"
+                     IsPassword="True"
+                     Margin="30,0"
+                     TextColor="Black"
+                     BackgroundColor="White"/>
+
+              <Button Text="Forgot Password?"
+                     BackgroundColor="Transparent"
+                     TextColor="Blue"
+                     FontSize="14"
+                     Margin="30,10,30,0"
+                     Clicked="OnForgotPasswordClicked"
+                     HorizontalOptions="End"/>
+
+              <Button Text="SIGN IN"
+                     BackgroundColor="#FF3593FF"
+                     TextColor="White"
+                     WidthRequest="200"
+                     Margin="30,20"
+                     Clicked="OnSignInClicked"/>
+
+              <Label Text="Don't have an account yet?"
+                     FontSize="14"
+                     TextColor="Black"
+                     HorizontalOptions="Center"
+                     Margin="0,20,0,0"/>
+
+              <Button Text="Register"
+                     FontSize="14"
+                     TextColor="White"
+                     BackgroundColor="#005cc8"
+                     Clicked="OnRegisterClicked"
+                     HorizontalOptions="Center"/>
+       </VerticalStackLayout>
+</ContentPage>
