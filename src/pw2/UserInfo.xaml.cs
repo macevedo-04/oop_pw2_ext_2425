@@ -18,24 +18,54 @@ public partial class UserInfoPage : ContentPage, IQueryAttributable
     {
         base.OnAppearing();
 
-        string filePath = "files/users.csv";
-
         try {
-            if (File.Exists(filePath)) {
-                foreach (string line in File.ReadAllLines(filePath)) {
+            string filePath = "files/users.csv";
+            string opsFilePath = "files/operations.csv";
+
+            List<string> userOps = new List<string>();
+
+            if (File.Exists(opsFilePath)) {
+                string[] lines = File.ReadAllLines(opsFilePath);
+
+                foreach (string line in lines) {
                     string[] fields = line.Split(';');
-                    if (fields[1] == currentUsername) {
+
+                    if (fields.Length == 5) {
+                        if (fields[0] == currentUsername && fields[2] != "0") {
+                            string formatted = " • " + fields[3] + ": " + fields[1] + " → " + fields[4] + " (bits: " + fields[2] + ")";
+                            userOps.Add(formatted);
+                        }
+                        else if (fields[0] == currentUsername) {
+                            string formatted = " • " + fields[3] + ": " + fields[1] + " → " + fields[4];
+                            userOps.Add(formatted);
+                        }
+                    }
+                }
+            }
+
+            OperationsListView.ItemsSource = userOps;
+
+            if (File.Exists(filePath)) {
+                string[] lines = File.ReadAllLines(filePath);
+                bool userFound = false;
+
+                foreach (string line in lines) {
+                    string[] fields = line.Split(';');
+
+                    if (!userFound && fields.Length == 5 && fields[1] == currentUsername) {
                         NameLabel.Text = "Name: " + fields[0];
                         UsernameLabel.Text = "Username: " + fields[1];
                         EmailLabel.Text = "Email: " + fields[2];
                         PasswordLabel.Text = "Password: " + fields[3];
                         NumOperationsLabel.Text = "Number of operations: " + fields[4];
+
+                        userFound = true;
                     }
                 }
             }
         }
         catch (IOException ex) {
-            Console.WriteLine("An error occurred reading the file: " + ex.Message);
+            Console.WriteLine("An I/O error occurred: " + ex.Message);
         }
         catch (Exception ex) {
             Console.WriteLine("An unexpected error occurred: " + ex.Message);

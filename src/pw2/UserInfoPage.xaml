@@ -43,12 +43,25 @@
                      FontSize="18"
                      Margin="30,0"
                      TextColor="Black"/>
-
+              <Label Text="OPERATIONS:"
+                     FontSize="20"
+                     Margin="30,10,0,0"
+                     TextColor="Black"/>
               <Label x:Name="NumOperationsLabel"
                      Text="Number of operations: "
                      FontSize="18"
                      Margin="30,0"
                      TextColor="Black"/>
-
+              <ListView x:Name="OperationsListView"
+                     Margin="30,10"
+                     HeightRequest="250">
+                     <ListView.ItemTemplate>
+                            <DataTemplate>
+                                   <ViewCell>
+                                          <Label Text="{Binding .}" TextColor="Black" FontSize="16"/>
+                                   </ViewCell>
+                            </DataTemplate>
+                     </ListView.ItemTemplate>
+              </ListView>
        </VerticalStackLayout>
 </ContentPage>

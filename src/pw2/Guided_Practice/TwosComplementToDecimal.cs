@@ -15,7 +15,7 @@ namespace pw2.Guided_Practice
 
             int result = 0;
 
-            if (!isNegative){ //If it's positive
+            if (!isNegative) { //If it's positive
                 for (int i = 0; i < n; i++){
                     int bit = input[i] - '0';
                     result += bit * (int)Math.Pow(2, n - i - 1); //We calculate normally with powers of 2 for each bit
@@ -26,13 +26,13 @@ namespace pw2.Guided_Practice
                     inverted[i] = input[i] == '0' ? '1' : '0'; //We flip the bits
                 
                 for (int i = n - 1; i >= 0; i--){ //We add 1
-                    if (inverted[i] == '0'){ //We set the first 0 to 1
+                    if (inverted[i] == '0') { //We set the first 0 to 1
                         inverted[i] = '1';
                         break;
                     } else
                         inverted[i] = '0';
                 }
-                for (int i = 0; i < n; i++){
+                for (int i = 0; i < n; i++) {
                     int bit = inverted[i] - '0';
                     result += bit * (int)Math.Pow(2, n - i - 1); //We calculate normally with powers of 2 for each bit
                 }

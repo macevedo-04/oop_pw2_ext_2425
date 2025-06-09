@@ -21,13 +21,19 @@
                                 HorizontalOptions="Center"
                                 Margin="0,-50,0,20"/>
 
-                        <Label x:Name="OutputLabel"
-                        FontSize="20"
-                        Margin="5,0,5,5"
-                        TextColor="#313131"
-                        LineBreakMode="TailTruncation"
-                        HorizontalTextAlignment="End"
-                        VerticalOptions="Start"/>
+                        <HorizontalStackLayout Margin="5,10,5,5" Spacing="10" HorizontalOptions="Center">
+                                <Label Text="Bits:" 
+                                        FontSize="18" 
+                                        TextColor="Black" 
+                                        VerticalOptions="Center" />
+                                <Entry x:Name="BitsEntry"
+                                        FontSize="18"
+                                        TextColor="Black"
+                                        BackgroundColor="White"
+                                        WidthRequest="80"
+                                        Keyboard="Numeric"
+                                        Text="8" />
+                        </HorizontalStackLayout>
 
                         <Entry  x:Name="InputEntry"
                                 FontSize="20"

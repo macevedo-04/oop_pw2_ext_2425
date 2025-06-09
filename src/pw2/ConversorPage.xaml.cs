@@ -72,6 +72,22 @@ public partial class ConversorPage : ContentPage, IQueryAttributable
         }
     }
 
+    private void RegisterOperation(string input, string output, string operationType, int bits = 0)
+    {
+        string filePath = "files/operations.csv";
+        string line = $"{currentUsername};{input};{bits};{operationType};{output}";
+
+        try {
+            using (StreamWriter sw = File.AppendText(filePath))
+            {
+                sw.WriteLine(line);
+            }
+        }
+        catch (Exception ex) {
+            Console.WriteLine($"Error registering the operation: {ex.Message}");
+        }
+    }
+
     private void ButtonNumber_Clicked(object sender, EventArgs e)
     {
         Button button = (Button)sender;
@@ -81,7 +97,6 @@ public partial class ConversorPage : ContentPage, IQueryAttributable
     private void ButtonAC_Clicked(object sender, EventArgs e)
     {
         InputEntry.Text = "";
-        OutputLabel.Text = "";
     }
 
     private void ButtonSign_Clicked(object sender, EventArgs e)
@@ -97,207 +112,204 @@ public partial class ConversorPage : ContentPage, IQueryAttributable
     private async void ButtonDecToBin_Clicked(object sender, EventArgs e)
     {
         if (!string.IsNullOrEmpty(InputEntry.Text)) {
-            OutputLabel.Text = "";
+            int bits = GetBits();
+            if (bits <= 0) {
+                await DisplayAlert("Warning", "Please enter a valid number of bits.", "OK");
+                InputEntry.Text = "";
+                return;
+            }
+
             try {
-                int bits = 0;
-                string bitsInput;
-                do {
-                    bitsInput = await DisplayPromptAsync("Bits", "How many bits should I use?", "OK", "Cancel", "Enter number of bits", 3, Keyboard.Numeric);
-                    if (bitsInput == null)
-                        return;
-                } while (bitsInput == "" || !int.TryParse(bitsInput, out bits) || bits <= 0);
                 DecimalToBinary converter = new DecimalToBinary("Binary", "Decimal to Binary");
                 converter.Validate(InputEntry.Text);
                 string binaryNumber = converter.Change(InputEntry.Text, bits);
-                OutputLabel.Text = binaryNumber;
+                RegisterOperation(InputEntry.Text, binaryNumber, "DecimalToBinary", bits);
+                InputEntry.Text = binaryNumber;
                 IncrementNumOperations();
             }
-            catch (FormatException ex) {
-                InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
-            }
             catch (Exception ex) {
+                await DisplayAlert("Warning", ex.Message, "OK");
                 InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
             }
         }
-        else 
-            OutputLabel.Text = "The entry cannot be empty.";
+        else {
+            await DisplayAlert("Warning", "The entry cannot be empty.", "OK");
+            InputEntry.Text = "";
+        }
     }
 
     private async void ButtonDecToTwoComp_Clicked(object sender, EventArgs e)
     {
         if (!string.IsNullOrEmpty(InputEntry.Text)) {
-            OutputLabel.Text = "";
+            int bits = GetBits();
+            if (bits <= 0) {
+                await DisplayAlert("Warning", "Please enter a valid number of bits.", "OK");
+                InputEntry.Text = "";
+                return;
+            }
+
             try {
-                int bits = 0;
-                string bitsInput;
-                do {
-                    bitsInput = await DisplayPromptAsync("Bits", "How many bits should I use?", "OK", "Cancel", "Enter number of bits", 3, Keyboard.Numeric);
-                    if (bitsInput == null)
-                        return;
-                } while (bitsInput == "" || !int.TryParse(bitsInput, out bits) || bits <= 0);
                 DecimalToTwosComplement converter = new DecimalToTwosComplement("Two's Complement", "Decimal to Two's Complement");
                 converter.Validate(InputEntry.Text);
                 string twoCompNumber = converter.Change(InputEntry.Text, bits);
-                OutputLabel.Text = twoCompNumber;
+                RegisterOperation(InputEntry.Text, twoCompNumber, "DecimalToTwoComp", bits);
+                InputEntry.Text = twoCompNumber;
                 IncrementNumOperations();
             }
-            catch (FormatException ex) {
-                InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
-            }
             catch (Exception ex) {
+                await DisplayAlert("Warning", ex.Message, "OK");
                 InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
             }
         }
-        else 
-            OutputLabel.Text = "The entry cannot be empty.";
+        else {
+            await DisplayAlert("Warning", "The entry cannot be empty.", "OK");
+            InputEntry.Text = "";
+        }
     }
 
     private async void ButtonDecToOct_Clicked(object sender, EventArgs e)
     {
         if (!string.IsNullOrEmpty(InputEntry.Text)) {
-            OutputLabel.Text = "";
             try {
                 DecimalToOctal converter = new DecimalToOctal("Octal", "Decimal to Octal");
                 converter.Validate(InputEntry.Text);
                 string octalNumber = converter.Change(InputEntry.Text);
-                OutputLabel.Text = octalNumber;
+                RegisterOperation(InputEntry.Text, octalNumber, "DecimalToOctal");
+                InputEntry.Text = octalNumber;
                 IncrementNumOperations();
             }
-            catch (FormatException ex) {
-                InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
-            }
             catch (Exception ex) {
+                await DisplayAlert("Warning", ex.Message, "OK");
                 InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
             }
         }
-        else 
-            OutputLabel.Text = "The entry cannot be empty.";
+        else {
+            await DisplayAlert("Warning", "The entry cannot be empty.", "OK");
+            InputEntry.Text = "";
+        }
     }
 
     private async void ButtonTwoCompToDec_Clicked(object sender, EventArgs e)
     {
         if (!string.IsNullOrEmpty(InputEntry.Text)) {
-            OutputLabel.Text = "";
             try {
                 TwosComplementToDecimal converter = new TwosComplementToDecimal("Decimal", "Two's Complement to Decimal");
                 converter.Validate(InputEntry.Text);
                 string decimalNumber = converter.Change(InputEntry.Text);
-                OutputLabel.Text = decimalNumber;
+                RegisterOperation(InputEntry.Text, decimalNumber, "TwoCompToDecimal");
+                InputEntry.Text = decimalNumber;
                 IncrementNumOperations();
             }
-            catch (FormatException ex) {
-                InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
-            }
             catch (Exception ex) {
+                await DisplayAlert("Warning", ex.Message, "OK");
                 InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
             }
         }
-        else 
-            OutputLabel.Text = "The entry cannot be empty.";
+        else {
+            await DisplayAlert("Warning", "The entry cannot be empty.", "OK");
+            InputEntry.Text = "";
+        }
     }
 
     private async void ButtonDecToHex_Clicked(object sender, EventArgs e)
     {
         if (!string.IsNullOrEmpty(InputEntry.Text)) {
-            OutputLabel.Text = "";
             try {
                 DecimalToHexadecimal converter = new DecimalToHexadecimal("Hexadecimal", "Decimal to Hexadecimal");
                 converter.Validate(InputEntry.Text);
                 string hexNumber = converter.Change(InputEntry.Text);
-                OutputLabel.Text = hexNumber;
+                RegisterOperation(InputEntry.Text, hexNumber, "DecimalToHexadecimal");
+                InputEntry.Text = hexNumber;
                 IncrementNumOperations();
             }
-            catch (FormatException ex) {
-                InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
-            }
             catch (Exception ex) {
+                await DisplayAlert("Warning", ex.Message, "OK");
                 InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
             }
         }
-        else 
-            OutputLabel.Text = "The entry cannot be empty.";
+        else {
+            await DisplayAlert("Warning", "The entry cannot be empty.", "OK");
+            InputEntry.Text = "";
+        }
     }
 
     private async void ButtonBinToDec_Clicked(object sender, EventArgs e)
     {
         if (!string.IsNullOrEmpty(InputEntry.Text)) {
-            OutputLabel.Text = "";
             try {
                 BinaryToDecimal converter = new BinaryToDecimal("Decimal", "Binary to Decimal");
                 converter.Validate(InputEntry.Text);
                 string decimalNumber = converter.Change(InputEntry.Text);
-                OutputLabel.Text = decimalNumber;
+                RegisterOperation(InputEntry.Text, decimalNumber, "BinaryToDecimal");
+                InputEntry.Text = decimalNumber;
                 IncrementNumOperations();
             }
-            catch (FormatException ex) {
-                InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
-            }
             catch (Exception ex) {
+                await DisplayAlert("Warning", ex.Message, "OK");
                 InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
             }
         }
-        else 
-            OutputLabel.Text = "The entry cannot be empty.";
+        else {
+            await DisplayAlert("Warning", "The entry cannot be empty.", "OK");
+            InputEntry.Text = "";
+        }
     }
 
     private async void ButtonOctToDec_Clicked(object sender, EventArgs e)
     {
         if (!string.IsNullOrEmpty(InputEntry.Text)) {
-            OutputLabel.Text = "";
             try {
                 OctalToDecimal converter = new OctalToDecimal("Decimal", "Octal to Decimal");
                 converter.Validate(InputEntry.Text);
                 string decimalNumber = converter.Change(InputEntry.Text);
-                OutputLabel.Text = decimalNumber;
+                RegisterOperation(InputEntry.Text, decimalNumber, "OctalToDecimal");
+                InputEntry.Text = decimalNumber;
                 IncrementNumOperations();
             }
-            catch (FormatException ex) {
-                InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
-            }
             catch (Exception ex) {
+                await DisplayAlert("Warning", ex.Message, "OK");
                 InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
             }
         }
-        else 
-            OutputLabel.Text = "The entry cannot be empty.";
+        else {
+            await DisplayAlert("Warning", "The entry cannot be empty.", "OK");
+            InputEntry.Text = "";
+        }
     }
 
     private async void ButtonHexToDec_Clicked(object sender, EventArgs e)
     {
         if (!string.IsNullOrEmpty(InputEntry.Text)) {
-            OutputLabel.Text = "";
             try {
                 HexadecimalToDecimal converter = new HexadecimalToDecimal("Decimal", "Hexadecimal to Decimal");
                 converter.Validate(InputEntry.Text);
                 string decimalNumber = converter.Change(InputEntry.Text);
-                OutputLabel.Text = decimalNumber;
+                RegisterOperation(InputEntry.Text, decimalNumber, "HexadecimalToDecimal");
+                InputEntry.Text = decimalNumber;
                 IncrementNumOperations();
             }
-            catch (FormatException ex) {
-                InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
-            }
             catch (Exception ex) {
+                await DisplayAlert("Warning", ex.Message, "OK");
                 InputEntry.Text = "";
-                await DisplayAlert("ERROR", $"{ex.Message}", "OK");
             }
         }
-        else 
-            OutputLabel.Text = "The entry cannot be empty.";
+        else {
+            await DisplayAlert("Warning", "The entry cannot be empty.", "OK");
+            InputEntry.Text = "";
+        }
+    }
+
+    private int GetBits()
+    {
+        int bits;
+        if (BitsEntry == null)
+            return -1;
+        string text = BitsEntry.Text;
+        if (string.IsNullOrWhiteSpace(text))
+            return -1;
+        if (int.TryParse(text, out bits) && bits > 0)
+            return bits;
+        return -1;
     }
 
     private async void OnOperationsClicked(object sender, EventArgs e)

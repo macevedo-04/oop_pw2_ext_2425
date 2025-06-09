@@ -22,7 +22,7 @@ namespace pw2.Guided_Practice
         public int GetNumberOperations() { return this.operations.Count; }
         public int PrintOperations()
         {
-            //Console.Clear();
+            Console.Clear();
 
             Console.WriteLine("-----------------------------------");
             for (int i = 1; i <= this.operations.Count; i++)

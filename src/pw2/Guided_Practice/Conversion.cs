@@ -25,7 +25,7 @@ namespace pw2.Guided_Practice
         }
         public void PrintConversion(string input, string output)
         {
-            //Console.Clear();
+            Console.Clear();
             Console.WriteLine($"The {this.name} representation of {input} is {output}");
             Console.ReadLine();
         }

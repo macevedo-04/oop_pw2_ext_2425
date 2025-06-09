@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="pw2.LoginPage"
-             BackgroundColor="#d3d3d3"
-             Title="Login">
+             Title="Login"
+             BackgroundColor="#D3D3D3">
              
        <ContentPage.ToolbarItems>
               <ToolbarItem Text="Exit" Clicked="OnExitClicked"/>
