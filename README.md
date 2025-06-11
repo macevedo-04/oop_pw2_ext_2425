@@ -42,13 +42,13 @@ Finally, the report concludes with a brief reflection on the development experie
 
 The application architecture is organised into three distinct layers, each with a specific responsibility:
 
-- **UI Layer:** 
+- **UI Layer:**  
   This layer is responsible for all user interactions and is implemented using XAML pages (`LoginPage.xaml`, `RegisterPage.xaml`, `PasswordRecoveryPage.xaml`, `ConversorPage.xaml`, and `UserInfoPage.xaml`). Each page is paired with a code-behind file (`*.xaml.cs`) that handles UI logic, event binding, and navigation. The UI is designed to be intuitive and responsive, leveraging MAUI's cross-platform capabilities to ensure consistency across devices. The use of XAML allows for a clear separation between the visual layout and the underlying logic, making the application easier to maintain and extend.
 
-- **Logic Layer:** 
+- **Logic Layer:**  
   The core functionality of the application resides in this layer. It includes all business logic, such as number system conversions, input validation, and user operation tracking. The logic is encapsulated in classes (located in the `Guided_Practice` directory and code-behind files) that follow object-oriented principles, promoting reusability and extensibility. The use of abstract base classes and interfaces allows for easy addition of new conversion types or validators. This layer is responsible for ensuring that all operations are performed correctly and efficiently, and that the application remains robust in the face of invalid input or unexpected user actions.
 
-- **Persistence Layer:** 
+- **Persistence Layer:**  
   Data persistence is managed through CSV files, primarily `users.csv`, which stores user credentials and operation counts, and `operations.csv`, which logs each conversion performed by users. File I/O operations are abstracted to ensure platform independence and to facilitate future migration to more robust storage solutions if needed. The persistence layer is designed to be efficient and reliable, ensuring that user data is always available and up-to-date.
 
 ### App's Pages
@@ -114,36 +114,36 @@ The application architecture is organised into three distinct layers, each with 
 
 ### Design and Development Decisions
 
-- **Separation of Concerns:** 
+- **Separation of Concerns:**  
   The application cleanly separates the UI, logic, and data persistence layers, improving maintainability.
-- **Extensibility:** 
+- **Extensibility:**  
   New conversions can easily be integrated by extending the `Conversion` class and implementing the necessary logic.
-- **Validation:** 
+- **Validation:**  
   Each conversion uses a dedicated `InputValidator` to ensure correctness, encapsulated within the conversion class to maintain cohesion.
-- **Default Bit Size:** 
+- **Default Bit Size:**  
   On the `ConversorPage`, certain conversion operations (specifically `DecimalToBinary` and `DecimalToTwosComplement`) require the user to specify the bit size for the output representation. To streamline the user experience and ensure consistent results, the application sets a default bit size of 8 bits in the corresponding input field. This default is only relevant for these two conversions; for all other operations, the bit size entry is ignored by the program. The implementation ensures that the bit size parameter is only passed to the conversion logic when necessary, preventing unintended behaviour in conversions that do not require it. This approach both simplifies the UI and reduces the risk of user error.
-- **User Tracking:** 
+- **User Tracking:**  
   Each user's data and number of operations is tracked and stored persistently in a CSV file. 
-- **Operation Tracking:** 
+- **Operation Tracking:**  
   When a user starts a session, all the conversions performed in said session are registered in a CSV file, so as to be able to display all the operations executed by the user in the UserInfo page. 
-- **ListView Operations Display:** 
+- **ListView Operations Display:**  
   The `UserInfoPage` presents all of a user's operations using a ListView control, enabling efficient vertical scrolling through the operation history while simultaneously displaying other personal information. This design enhances usability by allowing users to review their activity without navigating away from their profile data.
-- **Error Handling:** 
+- **Error Handling:**  
   All conversion operations are wrapped in `try-catch` blocks, allowing for graceful error messages and improved user experience. In order to prevent any I/O errors, the same thing was done with the methods that required file access. 
 
 ---
 
 ## Problems
 
-- **File Access:** 
+- **File Access:**  
   At first, managing file paths for reading and writing the CSV file across different platforms was complex due to relative path resolution issues.
-- **Input Validation:** 
+- **Input Validation:**  
   Ensuring robust handling of various numeric formats and edge cases (e.g. negative binary values, overflow) required detailed logic and testing, and also the need to find which classes and methods were needed in each case. 
-- **UI Responsiveness:** 
+- **UI Responsiveness:**  
   Implementing asynchronous behaviour to keep the UI responsive during validation and processing posed difficulties (since it was the first time encountering and using asynchronous methods), especially avoiding UI thread blocking.
-- **Classes and methods to use:** 
+- **Classes and methods to use:**  
   Discerning which method was needed in order to correctly perform the conversion proved to be challenging, and finding how to implement the logic for validation took some time, but finally found out which specific parts of the Guided Practice was needed in order to apply that functionality to this project. 
-- **MAUI in VSCode:** 
+- **MAUI in VSCode:**  
   The countless errors throughout the process made this practice slightly tiring, especially since debugging the project often caused problems: sometimes it would execute and display the program, while other times the program would exit unexpectedly. I initially assumed this was due to buffer issues, but was unsure how to resolve it. Ultimately, I solved these problems by carefully controlling file access and refactoring the navigation logic—specifically, by avoiding navigation inside a loop and instead using a boolean value to manage flow control. As a result, debugging and running the application became much more reliable, and I was able to consistently visualize the app pages without repeated attempts.
 
 ---
