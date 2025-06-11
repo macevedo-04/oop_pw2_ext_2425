@@ -54,7 +54,7 @@
                      TextColor="Black"/>
               <ListView x:Name="OperationsListView"
                      Margin="30,10"
-                     HeightRequest="250">
+                     HeightRequest="300">
                      <ListView.ItemTemplate>
                             <DataTemplate>
                                    <ViewCell>

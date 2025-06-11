@@ -5,87 +5,89 @@
              Title="Register"
              BackgroundColor="#D3D3D3">
 
-        <ContentPage.ToolbarItems>
-                <ToolbarItem Text="Exit" Clicked="OnExitClicked" Order="Primary" />
-        </ContentPage.ToolbarItems>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Exit" Clicked="OnExitClicked" Order="Primary" />
+    </ContentPage.ToolbarItems>
 
+    <ScrollView>
         <VerticalStackLayout>
-                <BoxView HeightRequest="60"
-                        BackgroundColor="#3B5A76"/>
-                <Label Text="OOP Conversor"
-                        FontSize="28"
-                        TextColor="White"
-                        HorizontalOptions="Center"
-                        Margin="0,-50,0,30"/>
+            <BoxView HeightRequest="60"
+                     BackgroundColor="#3B5A76"/>
+            <Label Text="OOP Conversor"
+                   FontSize="28"
+                   TextColor="White"
+                   HorizontalOptions="Center"
+                   Margin="0,-50,0,30"/>
 
-                <Label Text="Name"
-                        FontSize="18"
-                        Margin="30,0"
-                        TextColor="Black"/>
-                <Entry  x:Name="NameEntry"
-                        Placeholder="Enter your username"
-                        Margin="30,5"
+            <Label Text="Name"
+                   FontSize="18"
+                   Margin="30,0"
+                   TextColor="Black"/>
+            <Entry  x:Name="NameEntry"
+                    Placeholder="Enter your username"
+                    Margin="30,5"
+                    TextColor="Black"
+                    BackgroundColor="White"/>
+
+            <Label Text="Username"
+                   FontSize="18"
+                   Margin="30,0"
+                   TextColor="Black"/>
+            <Entry  x:Name="UsernameEntry"
+                    Placeholder="Enter your username"
+                    Margin="30,5"
+                    TextColor="Black"
+                    BackgroundColor="White"/>
+
+            <Label Text="Email"
+                   FontSize="18"
+                   Margin="30,0"
+                   TextColor="Black"/>
+            <Entry  x:Name="EmailEntry"
+                    Placeholder="Enter your email"
+                    Margin="30,5"
+                    TextColor="Black"
+                    BackgroundColor="White"/>
+
+            <Label Text="Password"
+                   FontSize="18"
+                   Margin="30,10,30,0"
+                   TextColor="Black"/>
+            <Entry  x:Name="PasswordEntry"
+                    Placeholder="Enter your password"
+                    IsPassword="True"
+                    Margin="30,5"
+                    TextColor="Black"
+                    BackgroundColor="White"/>
+
+            <Label Text="Confirm Password"
+                   FontSize="18"
+                   Margin="30,10,30,0"
+                   TextColor="Black"/>
+            <Entry  x:Name="ConfirmPasswordEntry"
+                    Placeholder="Repeat your password"
+                    IsPassword="True"
+                    Margin="30,5"
+                    TextColor="Black"
+                    BackgroundColor="White"/>
+
+            <HorizontalStackLayout>
+                <CheckBox x:Name="TermsCheckBox"
+                          Margin="30,0,0,0"
+                          VerticalOptions="Center"/>
+                <Label  Text="I accept terms of use and privacy policy"
+                        FontSize="12"
                         TextColor="Black"
-                        BackgroundColor="White"/>
+                        VerticalOptions="Center"
+                        Margin="5,0,0,0"/>
+            </HorizontalStackLayout>
 
-                <Label Text="Username"
-                        FontSize="18"
-                        Margin="30,0"
-                        TextColor="Black"/>
-                <Entry  x:Name="UsernameEntry"
-                        Placeholder="Enter your username"
-                        Margin="30,5"
-                        TextColor="Black"
-                        BackgroundColor="White"/>
-
-                <Label Text="Email"
-                        FontSize="18"
-                        Margin="30,0"
-                        TextColor="Black"/>
-                <Entry  x:Name="EmailEntry"
-                        Placeholder="Enter your email"
-                        Margin="30,5"
-                        TextColor="Black"
-                        BackgroundColor="White"/>
-
-                <Label Text="Password"
-                        FontSize="18"
-                        Margin="30,10,30,0"
-                        TextColor="Black"/>
-                <Entry  x:Name="PasswordEntry"
-                        Placeholder="Enter your password"
-                        IsPassword="True"
-                        Margin="30,5"
-                        TextColor="Black"
-                        BackgroundColor="White"/>
-
-                <Label Text="Confirm Password"
-                        FontSize="18"
-                        Margin="30,10,30,0"
-                        TextColor="Black"/>
-                <Entry  x:Name="ConfirmPasswordEntry"
-                        Placeholder="Repeat your password"
-                        IsPassword="True"
-                        Margin="30,5"
-                        TextColor="Black"
-                        BackgroundColor="White"/>
-
-                <HorizontalStackLayout>
-                        <CheckBox x:Name="TermsCheckBox"
-                                Margin="30,0,0,0"
-                                VerticalOptions="Center"/>
-                        <Label  Text="I accept terms of use and privacy policy"
-                                FontSize="12"
-                                TextColor="Black"
-                                VerticalOptions="Center"
-                                Margin="5,0,0,0"/>
-                </HorizontalStackLayout>
-
-                <Button Text="REGISTER"
-                        BackgroundColor="#005cc8"
-                        TextColor="White"
-                        Margin="30,20"
-                        WidthRequest="200"
-                        Clicked="OnRegisterClicked"/>
+            <Button Text="REGISTER"
+                    BackgroundColor="#005cc8"
+                    TextColor="White"
+                    Margin="30,20"
+                    WidthRequest="200"
+                    Clicked="OnRegisterClicked"/>
         </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
