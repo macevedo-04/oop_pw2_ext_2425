@@ -19,7 +19,7 @@ namespace pw2
             numOperations = 0;
         }
 
-        public void SaveToFile(string filePath)
+        public void SaveToFile(string filePath) //Saves the user information to the specified file path in CSV format
         {
             try {
                 using (StreamWriter writer = File.AppendText(filePath))

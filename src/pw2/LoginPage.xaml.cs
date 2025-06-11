@@ -8,7 +8,7 @@ public partial class LoginPage : ContentPage
         InitializeComponent();
     }
     
-    protected override void OnAppearing()
+    protected override void OnAppearing() // Reset the entries when the page appears
     {
         base.OnAppearing();
 
@@ -16,7 +16,7 @@ public partial class LoginPage : ContentPage
         PasswordEntry.Text = "";
     }
 
-    private async void OnSignInClicked(object sender, EventArgs e)
+    private async void OnSignInClicked(object sender, EventArgs e) //Logs the user in if the username and password match an entry in the users.csv file
     {
         string filePath = "files/users.csv";
         bool found = false;
@@ -51,17 +51,17 @@ public partial class LoginPage : ContentPage
             await DisplayAlert("Login Failed", "Account does not exist or password is incorrect.", "OK");
     }
 
-    private async void OnRegisterClicked(object sender, EventArgs e)
+    private async void OnRegisterClicked(object sender, EventArgs e) //Navigates to the RegisterPage
     {
         await Shell.Current.GoToAsync(nameof(RegisterPage));
     }
 
-    private async void OnForgotPasswordClicked(object sender, EventArgs e)
+    private async void OnForgotPasswordClicked(object sender, EventArgs e) //Navigates to the PasswordRecoveryPage
     {
         await Shell.Current.GoToAsync(nameof(PasswordRecoveryPage));
     }
 
-    private void OnExitClicked(object sender, EventArgs e)
+    private void OnExitClicked(object sender, EventArgs e) //Exits the application
     {
         Environment.Exit(0);
     }

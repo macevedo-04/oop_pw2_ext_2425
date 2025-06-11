@@ -8,13 +8,13 @@ public partial class UserInfoPage : ContentPage, IQueryAttributable
         InitializeComponent();
     }
 
-    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    public void ApplyQueryAttributes(IDictionary<string, object> query) //Sets the current username from the query parameters
     {
         if (query.ContainsKey("username"))
             this.currentUsername = query["username"].ToString();
     }
 
-    protected override void OnAppearing()
+    protected override void OnAppearing() // Loads user information and operations from operations.csv when the page appears
     {
         base.OnAppearing();
 
@@ -72,18 +72,18 @@ public partial class UserInfoPage : ContentPage, IQueryAttributable
         }
     }
 
-    private async void OnCalculatorClicked(object sender, EventArgs e)
+    private async void OnCalculatorClicked(object sender, EventArgs e) //Navigates to the ConversorPage with the current username as a query parameter
     {
         await Shell.Current.GoToAsync($"{nameof(ConversorPage)}?username={currentUsername}");
     }
 
-    private async void OnLogOutClicked(object sender, EventArgs e)
+    private async void OnLogOutClicked(object sender, EventArgs e) //Logs the user out by clearing the current username and navigating to the LoginPage
     {
         this.currentUsername = "";
         await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
     }
 
-    private void OnExitClicked(object sender, EventArgs e)
+    private void OnExitClicked(object sender, EventArgs e) //Exits the application
     {
         Environment.Exit(0);
     }

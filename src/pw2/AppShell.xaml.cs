@@ -6,6 +6,7 @@ public partial class AppShell : Shell
 	{
 		InitializeComponent();
 
+		// Register routes for navigation
 		Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
         Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
         Routing.RegisterRoute(nameof(PasswordRecoveryPage), typeof(PasswordRecoveryPage));

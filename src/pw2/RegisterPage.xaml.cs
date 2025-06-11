@@ -9,7 +9,7 @@ public partial class RegisterPage : ContentPage
         InitializeComponent();
     }
 
-    private async void OnRegisterClicked(object sender, EventArgs e)
+    private async void OnRegisterClicked(object sender, EventArgs e) //Registers the user if the username does not already exist in the users.csv file and all fields are valid
     {
         string filePath = "files/users.csv";
         bool correct = false;
@@ -64,7 +64,7 @@ public partial class RegisterPage : ContentPage
             await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
     }
 
-    private string GetValidationError()
+    private string GetValidationError() // Validates the input fields for the registration form
     {
         var hasUpperChar = new Regex(@"[A-Z]+");
         var hasLowerChar = new Regex(@"[a-z]+");
@@ -86,7 +86,7 @@ public partial class RegisterPage : ContentPage
         return null;
     }
 
-    private void OnExitClicked(object sender, EventArgs e)
+    private void OnExitClicked(object sender, EventArgs e) // Exits the application
     {
         Environment.Exit(0);
     }

@@ -8,7 +8,7 @@ public partial class PasswordRecoveryPage : ContentPage
         InitializeComponent();
     }
 
-    private async void OnRecoverClicked(object sender, EventArgs e)
+    private async void OnRecoverClicked(object sender, EventArgs e) //Changes the password for the user if the username matches an entry in the users.csv file
     {
         string filePath = "files/users.csv";
         bool found = false;
@@ -64,7 +64,7 @@ public partial class PasswordRecoveryPage : ContentPage
         }
     }
 
-    private string GetPasswordFormatError(string password)
+    private string GetPasswordFormatError(string password) // Validates the password format
     {
         var hasUpperChar = new Regex(@"[A-Z]+");
         var hasLowerChar = new Regex(@"[a-z]+");
@@ -77,12 +77,12 @@ public partial class PasswordRecoveryPage : ContentPage
         return null;
     }
 
-    private async void OnBackClicked(object sender, EventArgs e)
+    private async void OnBackClicked(object sender, EventArgs e) //Navigates back to the LoginPage
     {
         await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
     }    
 
-    private void OnExitClicked(object sender, EventArgs e)
+    private void OnExitClicked(object sender, EventArgs e) //Exits the application
     {
         Environment.Exit(0);
     }
