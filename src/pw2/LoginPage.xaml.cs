@@ -8,7 +8,7 @@ public partial class LoginPage : ContentPage
         InitializeComponent();
     }
     
-    protected override void OnAppearing() // Reset the entries when the page appears
+    protected override void OnAppearing() //Reset the entries when the page appears
     {
         base.OnAppearing();
 
@@ -18,7 +18,9 @@ public partial class LoginPage : ContentPage
 
     private async void OnSignInClicked(object sender, EventArgs e) //Logs the user in if the username and password match an entry in the users.csv file
     {
-        string filePath = "files/users.csv";
+        string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
+        Directory.CreateDirectory(dir);
+        string filePath = Path.Combine(dir, "users.csv");
         bool found = false;
 
         if (string.IsNullOrEmpty(UsernameEntry.Text) || string.IsNullOrEmpty(PasswordEntry.Text)) {

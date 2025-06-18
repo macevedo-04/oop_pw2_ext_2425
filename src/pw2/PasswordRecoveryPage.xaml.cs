@@ -10,7 +10,9 @@ public partial class PasswordRecoveryPage : ContentPage
 
     private async void OnRecoverClicked(object sender, EventArgs e) //Changes the password for the user if the username matches an entry in the users.csv file
     {
-        string filePath = "files/users.csv";
+        string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
+        Directory.CreateDirectory(dir);
+        string filePath = Path.Combine(dir, "users.csv");
         bool found = false;
 
         if (string.IsNullOrEmpty(UsernameEntry.Text) || string.IsNullOrEmpty(NewPasswordEntry.Text) || string.IsNullOrEmpty(ConfirmPasswordEntry.Text)) {

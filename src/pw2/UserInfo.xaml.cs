@@ -14,13 +14,15 @@ public partial class UserInfoPage : ContentPage, IQueryAttributable
             this.currentUsername = query["username"].ToString();
     }
 
-    protected override void OnAppearing() // Loads user information and operations from operations.csv when the page appears
+    protected async override void OnAppearing() // Loads user information and operations from operations.csv when the page appears
     {
         base.OnAppearing();
 
         try {
-            string filePath = "files/users.csv";
-            string opsFilePath = "files/operations.csv";
+            string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
+            Directory.CreateDirectory(dir);
+            string filePath = Path.Combine(dir, "users.csv");
+            string opsFilePath = Path.Combine(dir, "operations.csv");
 
             List<string> userOps = new List<string>();
 
@@ -65,10 +67,10 @@ public partial class UserInfoPage : ContentPage, IQueryAttributable
             }
         }
         catch (IOException ex) {
-            Console.WriteLine("An I/O error occurred: " + ex.Message);
+            await DisplayAlert("Error", $"An I/O error occurred while accessing user data: {ex.Message}", "OK");
         }
         catch (Exception ex) {
-            Console.WriteLine("An unexpected error occurred: " + ex.Message);
+            await DisplayAlert("Error", $"An unexpected error occurred: {ex.Message}", "OK");
         }
     }
 

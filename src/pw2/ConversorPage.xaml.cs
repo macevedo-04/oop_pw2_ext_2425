@@ -50,31 +50,52 @@ public partial class ConversorPage : ContentPage, IQueryAttributable
         ButtonHexToDec.Clicked += ButtonHexToDec_Clicked;
     }
 
-    private void IncrementNumOperations() //Increments the number of operations performed by the user
+    private async void IncrementNumOperations() //Increments the number of operations performed by the user
     {
-        string filePath = "files/users.csv";
-        if (File.Exists(filePath)) {
-            string[] lines = File.ReadAllLines(filePath);
-            bool found = false;
+        string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
+        Directory.CreateDirectory(dir);
+        string filePath = Path.Combine(dir, "users.csv");
+        
+        try {
+            if (File.Exists(filePath))
+            {
+                string[] lines = File.ReadAllLines(filePath);
+                bool found = false;
 
-            for (int i = 0; i < lines.Length; i++) {
-                string[] fields = lines[i].Split(';');
-                if (fields[1] == this.currentUsername) {
-                int newNumOp = Convert.ToInt32(fields[4]);
-                newNumOp++;
-                fields[4] = newNumOp.ToString();
-                lines[i] = string.Join(";", fields);
-                found = true;}
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    string[] fields = lines[i].Split(';');
+                    if (fields[1] == this.currentUsername)
+                    {
+                        int newNumOp = Convert.ToInt32(fields[4]);
+                        newNumOp++;
+                        fields[4] = newNumOp.ToString();
+                        lines[i] = string.Join(";", fields);
+                        found = true;
+                    }
+                }
+
+                if (found)
+                    File.WriteAllLines(filePath, lines);
+                else
+                    await DisplayAlert("Error", "User not found in the file.", "OK");
             }
-
-            if (found)
-                File.WriteAllLines(filePath, lines);
+        }
+        catch (IOException ex) {
+            await DisplayAlert("Error", $"An I/O error occurred while accessing the file: {ex.Message}", "OK");
+            return;
+        }
+        catch (Exception ex) {
+            await DisplayAlert("Error", $"An unexpected error occurred: {ex.Message}", "OK");
+            return;
         }
     }
 
-    private void RegisterOperation(string input, string output, string operationType, int bits = 0) //Appends a new operation to the log file
+    private async void RegisterOperation(string input, string output, string operationType, int bits = 0) //Appends a new operation to the log file
     {
-        string filePath = "files/operations.csv";
+        string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
+        Directory.CreateDirectory(dir);
+        string filePath = Path.Combine(dir, "operations.csv");
         string line = $"{currentUsername};{input};{bits};{operationType};{output}";
 
         try {
@@ -83,8 +104,14 @@ public partial class ConversorPage : ContentPage, IQueryAttributable
                 sw.WriteLine(line);
             }
         }
-        catch (Exception ex) {
-            Console.WriteLine($"Error registering the operation: {ex.Message}");
+        catch (IOException ex) {
+            await DisplayAlert("Error", $"An I/O error occurred while writing to the file: {ex.Message}", "OK");
+            return;
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"An unexpected error occurred: {ex.Message}", "OK");
+            return;
         }
     }
 

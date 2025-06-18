@@ -19,10 +19,14 @@ namespace pw2
             numOperations = 0;
         }
 
-        public void SaveToFile(string filePath) //Saves the user information to the specified file path in CSV format
+        public void SaveToFile() //Saves the user information to the specified file path in CSV format
         {
             try {
-                using (StreamWriter writer = File.AppendText(filePath))
+                string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
+                Directory.CreateDirectory(dir);
+                string fullPath = Path.Combine(dir, "users.csv");
+
+                using (StreamWriter writer = File.AppendText(fullPath))
                 {
                     writer.WriteLine($"{this.name};{this.username};{this.email};{this.password};{this.numOperations}");
                 }
