@@ -28,7 +28,7 @@ namespace pw2
 
                 using (StreamWriter writer = File.AppendText(fullPath))
                 {
-                    writer.WriteLine($"{this.name};{this.username};{this.email};{this.password};{this.numOperations}");
+                    writer.WriteLine($"{this.name},{this.username},{this.email},{this.password},{this.numOperations}");
                 }
             }
             catch (IOException ex) {

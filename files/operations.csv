@@ -1,6 +1,6 @@
-JohnDoe;123;8;DecimalToBinary;01111011
-JohnDoe;101010;0;BinaryToDecimal;42
-JohnDoe;65;0;DecimalToHexadecimal;41
-JaneSmith;123;8;DecimalToBinary;01111011
-JaneSmith;101010;0;BinaryToDecimal;42
-JaneSmith;65;0;DecimalToHexadecimal;41
+JohnDoe,123,8DecimalToBinary,01111011
+JohnDoe,101010,0,BinaryToDecimal,42
+JohnDoe,65,0,DecimalToHexadecimal,41
+JaneSmith,123,8,DecimalToBinary,01111011
+JaneSmith,101010,0,BinaryToDecimal,42
+JaneSmith,65,0,DecimalToHexadecimal,41

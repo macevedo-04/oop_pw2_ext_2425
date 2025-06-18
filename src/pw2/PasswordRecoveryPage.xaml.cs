@@ -36,14 +36,14 @@ public partial class PasswordRecoveryPage : ContentPage
                 string[] lines = File.ReadAllLines(filePath);
 
                 for (int i = 0; i < lines.Length; i++) {
-                    string[] fields = lines[i].Split(';');
+                    string[] fields = lines[i].Split(',');
                     if (fields[1] == UsernameEntry.Text) {
                         if (fields[3] == NewPasswordEntry.Text) {
                             await DisplayAlert("Warning", "The new password matches the current password for this account.", "OK");
                             return;
                         }
                         fields[3] = NewPasswordEntry.Text;
-                        lines[i] = string.Join(";", fields);
+                        lines[i] = string.Join(",", fields);
                         found = true;
                     }
                 }

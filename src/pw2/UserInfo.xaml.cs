@@ -30,7 +30,7 @@ public partial class UserInfoPage : ContentPage, IQueryAttributable
                 string[] lines = File.ReadAllLines(opsFilePath);
 
                 foreach (string line in lines) {
-                    string[] fields = line.Split(';');
+                    string[] fields = line.Split(',');
 
                     if (fields.Length == 5) {
                         if (fields[0] == currentUsername && fields[2] != "0") {
@@ -52,7 +52,7 @@ public partial class UserInfoPage : ContentPage, IQueryAttributable
                 bool userFound = false;
 
                 foreach (string line in lines) {
-                    string[] fields = line.Split(';');
+                    string[] fields = line.Split(',');
 
                     if (!userFound && fields.Length == 5 && fields[1] == currentUsername) {
                         NameLabel.Text = "Name: " + fields[0];

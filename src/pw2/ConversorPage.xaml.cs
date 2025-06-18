@@ -64,13 +64,13 @@ public partial class ConversorPage : ContentPage, IQueryAttributable
 
                 for (int i = 0; i < lines.Length; i++)
                 {
-                    string[] fields = lines[i].Split(';');
+                    string[] fields = lines[i].Split(',');
                     if (fields[1] == this.currentUsername)
                     {
                         int newNumOp = Convert.ToInt32(fields[4]);
                         newNumOp++;
                         fields[4] = newNumOp.ToString();
-                        lines[i] = string.Join(";", fields);
+                        lines[i] = string.Join(",", fields);
                         found = true;
                     }
                 }
@@ -96,7 +96,7 @@ public partial class ConversorPage : ContentPage, IQueryAttributable
         string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
         Directory.CreateDirectory(dir);
         string filePath = Path.Combine(dir, "operations.csv");
-        string line = $"{currentUsername};{input};{bits};{operationType};{output}";
+        string line = $"{currentUsername},{input},{bits},{operationType},{output}";
 
         try {
             using (StreamWriter sw = File.AppendText(filePath))

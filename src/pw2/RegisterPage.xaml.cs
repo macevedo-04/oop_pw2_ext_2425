@@ -24,7 +24,7 @@ public partial class RegisterPage : ContentPage
         try {
             if (File.Exists(filePath)) {
                 foreach (string line in File.ReadAllLines(filePath)) {
-                    string[] fields = line.Split(';');
+                    string[] fields = line.Split(',');
                     if (fields.Length > 1 && fields[1] == UsernameEntry.Text) {
                         await DisplayAlert("Register Failed", "Username already exists.", "OK");
                         return;

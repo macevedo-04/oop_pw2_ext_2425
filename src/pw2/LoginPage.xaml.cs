@@ -32,7 +32,7 @@ public partial class LoginPage : ContentPage
             if (File.Exists(filePath)) {
                 string[] lines = File.ReadAllLines(filePath);
                 foreach (string line in lines) {
-                    string[] fields = line.Split(';');
+                    string[] fields = line.Split(',');
                     if (fields[1] == UsernameEntry.Text && fields[3] == PasswordEntry.Text)
                         found = true;
                 }
