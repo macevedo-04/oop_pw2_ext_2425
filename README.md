@@ -136,7 +136,7 @@ The application architecture is organised into three distinct layers, each with 
 ## Problems
 
 - **File Access:**  
-  At first, managing file paths for reading and writing the CSV file across different platforms was complex due to relative path resolution issues. In the end, thanks to the guidance of my professor, I made use of the App Data Directory (`FileSystem.AppDataDirectory` function) to create a `files` folder that will contain thte files used for user data and operation storage, which is local to the machine of the user running the application. This solved an I/O exception that emerged when running the program in another computer. 
+  At first, managing file paths for reading and writing the CSV file across different platforms was complex due to relative path resolution issues. In the end, thanks to the guidance of my professor, I made use of the App Data Directory (`FileSystem.AppDataDirectory` function) to create a `files` folder that will contain thte files used for user data and operation storage, which is local to the machine of the user running the application. This solved an I/O exception that emerged when running the program in another computer. In order to show the structure of the files used by the application, I have left the `files` folder inside the project folder, but said folder is technically obsolete, it is only used for structural guidance.
 - **Input Validation:**  
   Ensuring robust handling of various numeric formats and edge cases (e.g. negative binary values, overflow) required detailed logic and testing, and also the need to find which classes and methods were needed in each case. 
 - **UI Responsiveness:**  
