@@ -123,9 +123,9 @@ The application architecture is organised into three distinct layers, each with 
 - **Default Bit Size:**  
   On the `ConversorPage`, certain conversion operations (specifically `DecimalToBinary` and `DecimalToTwosComplement`) require the user to specify the bit size for the output representation. To streamline the user experience and ensure consistent results, the application sets a default bit size of 8 bits in the corresponding input field. This default is only relevant for these two conversions; for all other operations, the bit size entry is ignored by the program. The implementation ensures that the bit size parameter is only passed to the conversion logic when necessary, preventing unintended behaviour in conversions that do not require it. This approach both simplifies the UI and reduces the risk of user error.
 - **User Tracking:**  
-  Each user's data and number of operations is tracked and stored persistently in a CSV file. 
+  Each user's data and number of operations is tracked and stored persistently in a CSV file. Said CSV file is stored inside a `files` folder using the `FileSystem.AppDataDirectory` function, as recommended by my professor.
 - **Operation Tracking:**  
-  When a user starts a session, all the conversions performed in said session are registered in a CSV file, so as to be able to display all the operations executed by the user in the UserInfo page. 
+  When a user starts a session, all the conversions performed in said session are registered in a CSV file, so as to be able to display all the operations executed by the user in the UserInfo page. Said CSV file is stored inside a `files` folder using the `FileSystem.AppDataDirectory` function, as recommended by my professor.
 - **ListView Operations Display:**  
   The `UserInfoPage` presents all of a user's operations using a ListView control, enabling efficient vertical scrolling through the operation history while simultaneously displaying other personal information. This design enhances usability by allowing users to review their activity without navigating away from their profile data.
 - **Error Handling:**  
@@ -136,7 +136,7 @@ The application architecture is organised into three distinct layers, each with 
 ## Problems
 
 - **File Access:**  
-  At first, managing file paths for reading and writing the CSV file across different platforms was complex due to relative path resolution issues.
+  At first, managing file paths for reading and writing the CSV file across different platforms was complex due to relative path resolution issues. In the end, thanks to the guidance of my professor, I made use of the App Data Directory (`FileSystem.AppDataDirectory` function) to create a `files` folder that will contain thte files used for user data and operation storage, which is local to the machine of the user running the application. This solved an I/O exception that emerged when running the program in another computer. 
 - **Input Validation:**  
   Ensuring robust handling of various numeric formats and edge cases (e.g. negative binary values, overflow) required detailed logic and testing, and also the need to find which classes and methods were needed in each case. 
 - **UI Responsiveness:**  
