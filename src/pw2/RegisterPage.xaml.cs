@@ -11,9 +11,6 @@ public partial class RegisterPage : ContentPage
 
     private async void OnRegisterClicked(object sender, EventArgs e) //Registers the user if the username does not already exist in the users.csv file and all fields are valid
     {
-        string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
-        Directory.CreateDirectory(dir);
-        string filePath = Path.Combine(dir, "users.csv");
         bool correct = false;
 
         if (!TermsCheckBox.IsChecked) {
@@ -22,10 +19,17 @@ public partial class RegisterPage : ContentPage
         }
 
         try {
-            if (File.Exists(filePath)) {
-                foreach (string line in File.ReadAllLines(filePath)) {
+            string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
+            Directory.CreateDirectory(dir);
+            string filePath = Path.Combine(dir, "users.csv");
+
+            if (File.Exists(filePath))
+            {
+                foreach (string line in File.ReadAllLines(filePath))
+                {
                     string[] fields = line.Split(',');
-                    if (fields.Length > 1 && fields[1] == UsernameEntry.Text) {
+                    if (fields.Length > 1 && fields[1] == UsernameEntry.Text)
+                    {
                         await DisplayAlert("Register Failed", "Username already exists.", "OK");
                         return;
                     }

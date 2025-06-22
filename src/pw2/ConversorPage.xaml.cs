@@ -51,12 +51,12 @@ public partial class ConversorPage : ContentPage, IQueryAttributable
     }
 
     private async void IncrementNumOperations() //Increments the number of operations performed by the user
-    {
-        string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
-        Directory.CreateDirectory(dir);
-        string filePath = Path.Combine(dir, "users.csv");
-        
+    {        
         try {
+            string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
+            Directory.CreateDirectory(dir);
+            string filePath = Path.Combine(dir, "users.csv");
+
             if (File.Exists(filePath))
             {
                 string[] lines = File.ReadAllLines(filePath);
@@ -93,12 +93,12 @@ public partial class ConversorPage : ContentPage, IQueryAttributable
 
     private async void RegisterOperation(string input, string output, string operationType, int bits = 0) //Appends a new operation to the log file
     {
-        string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
-        Directory.CreateDirectory(dir);
-        string filePath = Path.Combine(dir, "operations.csv");
-        string line = $"{currentUsername},{input},{bits},{operationType},{output}";
-
         try {
+            string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
+            Directory.CreateDirectory(dir);
+            string filePath = Path.Combine(dir, "operations.csv");
+            string line = $"{currentUsername},{input},{bits},{operationType},{output}";
+
             using (StreamWriter sw = File.AppendText(filePath))
             {
                 sw.WriteLine(line);

@@ -18,9 +18,6 @@ public partial class LoginPage : ContentPage
 
     private async void OnSignInClicked(object sender, EventArgs e) //Logs the user in if the username and password match an entry in the users.csv file
     {
-        string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
-        Directory.CreateDirectory(dir);
-        string filePath = Path.Combine(dir, "users.csv");
         bool found = false;
 
         if (string.IsNullOrEmpty(UsernameEntry.Text) || string.IsNullOrEmpty(PasswordEntry.Text)) {
@@ -29,15 +26,22 @@ public partial class LoginPage : ContentPage
         }
 
         try {
-            if (File.Exists(filePath)) {
+            string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
+            Directory.CreateDirectory(dir);
+            string filePath = Path.Combine(dir, "users.csv");
+            
+            if (File.Exists(filePath))
+            {
                 string[] lines = File.ReadAllLines(filePath);
-                foreach (string line in lines) {
+                foreach (string line in lines)
+                {
                     string[] fields = line.Split(',');
                     if (fields[1] == UsernameEntry.Text && fields[3] == PasswordEntry.Text)
                         found = true;
                 }
             }
-            else {
+            else
+            {
                 await DisplayAlert("File Missing", "User data file not found.", "OK");
                 return;
             }

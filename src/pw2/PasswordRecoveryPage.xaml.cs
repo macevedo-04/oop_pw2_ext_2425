@@ -10,9 +10,6 @@ public partial class PasswordRecoveryPage : ContentPage
 
     private async void OnRecoverClicked(object sender, EventArgs e) //Changes the password for the user if the username matches an entry in the users.csv file
     {
-        string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
-        Directory.CreateDirectory(dir);
-        string filePath = Path.Combine(dir, "users.csv");
         bool found = false;
 
         if (string.IsNullOrEmpty(UsernameEntry.Text) || string.IsNullOrEmpty(NewPasswordEntry.Text) || string.IsNullOrEmpty(ConfirmPasswordEntry.Text)) {
@@ -32,13 +29,21 @@ public partial class PasswordRecoveryPage : ContentPage
         }
 
         try {
-            if (File.Exists(filePath)) {
+            string dir = Path.Combine(FileSystem.AppDataDirectory, "files");
+            Directory.CreateDirectory(dir);
+            string filePath = Path.Combine(dir, "users.csv");
+
+            if (File.Exists(filePath))
+            {
                 string[] lines = File.ReadAllLines(filePath);
 
-                for (int i = 0; i < lines.Length; i++) {
+                for (int i = 0; i < lines.Length; i++)
+                {
                     string[] fields = lines[i].Split(',');
-                    if (fields[1] == UsernameEntry.Text) {
-                        if (fields[3] == NewPasswordEntry.Text) {
+                    if (fields[1] == UsernameEntry.Text)
+                    {
+                        if (fields[3] == NewPasswordEntry.Text)
+                        {
                             await DisplayAlert("Warning", "The new password matches the current password for this account.", "OK");
                             return;
                         }
@@ -48,7 +53,8 @@ public partial class PasswordRecoveryPage : ContentPage
                     }
                 }
 
-                if (found) {
+                if (found)
+                {
                     File.WriteAllLines(filePath, lines);
                     await DisplayAlert("Success", "Password changed successfully.", "OK");
                 }
